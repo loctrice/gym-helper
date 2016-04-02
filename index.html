@@ -17,6 +17,8 @@
     crossorigin="anonymous"></script>
     
     <script src='weights.js'></script>
+    <script src='rules.js'></script>
+    <script src='page-data.js'></script>
 </head>
 
 <body>
@@ -59,38 +61,17 @@
         <div id="example"></div>
 
         <div class="panel panel-primary">
-            <div class="panel-heading">Dead lift
+            <div class="panel-heading"><span id='lift-name'></span>
                 <span class='label label-info pull-right'>
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                <span class="sr-only">10's Week</span> Acumulation Phase</span>
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only"></span>
+                    <span id='lift-week'></span>
+                    <span id='phase-name'></span>
+                </span>
             </div>
             <div class="panel-body">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <span class="badge">288 lbs</span>
-                        <span class='label label-primary'>5 Reps</span>
-                        <span class="label label-info" id='test-weight-output'>2x45's, 25, and a 5</span>
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">328 lbs</span>
-                        <span class='label label-primary'>5 Reps</span>
-                        <span class="label label-info">3x45's, and a 5</span>
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">354 lbs</span>
-                        <span class='label label-primary'>10 Reps</span>
-                        <span class="label label-info">3x45's,2x10's</span>
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">354 lbs</span>
-                        <span class='label label-primary'>10 Reps</span>
-                        <span class="label label-info">3x45's,2x10's</span>
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">354 lbs</span>
-                        <span class='label label-primary'>10 Reps</span>
-                        <span class="label label-info">3x45's,2x10's</span>
-                    </li>
+                <ul class="list-group" id='lift-display'>
+                    
                 </ul>
                 <button class='btn btn-success btn-xs pull-right'>Complete Exercise &nbsp;<span class='glyphicon glyphicon-ok'></span></button>
             </div>
