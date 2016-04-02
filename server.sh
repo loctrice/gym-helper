@@ -9,4 +9,5 @@ command -v python >/dev/null 2>&1 || {
     }
 
 #start the webserver in the current directory  on port 8000    
-python -m SimpleHTTPServer 8000
+#python -m SimpleHTTPServer 8000
+php -S 127.0.0.1:8000

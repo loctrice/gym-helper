@@ -1,11 +1,23 @@
 /* global LoadingWeights */
-/* global page */
 /* global JuggRules */
+/* global ajax */
 
 (function() {
     'use strict';
 
     function start() {
+        //get page variable from php
+        var request = new ajax();
+        request.send('test.php/page-data', 
+        function(data){
+            buildPage(JSON.parse(data));
+        },
+        function(){
+            alert('error');
+        });
+    }
+    
+    function buildPage(page){
         //for the first lift that isn't done
         var today;
         for (var i = 0; i < page.lifts.length; i++) {
@@ -33,13 +45,6 @@
             li.innerHTML = html;
             document.getElementById('lift-display').appendChild(li);
         }
-        /*
-        <li class="list-group-item">
-                        <span class="badge">288 lbs</span>
-                        <span class='label label-primary'>5 Reps</span>
-                        <span class="label label-info" id='test-weight-output'>2x45's, 25, and a 5</span>
-                    </li>
-                    */
     }
 
     start();
