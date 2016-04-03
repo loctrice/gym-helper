@@ -4,41 +4,32 @@
 */
 function ajax() {
     'use strict';
-    var requestType = 'GET';
+    
     var service = {
-        send: send
+        get: get
     };
 
     return service;
 
-    /** Make the ajax call.
-    * @param {string} url to make request
-    * @param {method} callback function for success
-    * @param {method} callback function for error
-    */
-    function send(url, callback, errorCallback) {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState === XMLHttpRequest.DONE) {
-                if (xmlhttp.status === 200) {
-                    if (typeof(callback) === 'function') {
-                        callback(xmlhttp.responseText);
-                    }
-                }
-                else if (xmlhttp.status === 400) {
-                    if (typeof(errorCallback) === 'function') {
-                        errorCallback(xmlhttp.satus);
-                    }
+    function get(url) {
+        return new Promise(function(resolve, reject) {
+            var req = new XMLHttpRequest();
+            req.open('GET', url);
+
+            req.onload = function() {
+                if (req.status === 200) {
+                    resolve(req.response);
                 }
                 else {
-                    if (typeof(errorCallback) === 'function') {
-                        errorCallback(xmlhttp.status);
-                    }
+                    reject(Error(req.statusText));
                 }
-            }
-        };
+            };
 
-        xmlhttp.open(requestType, url, true);
-        xmlhttp.send();
+            req.onerror = function() {
+                reject(Error('Network Error'));
+            };
+
+            req.send();
+        });
     }
 }

@@ -1,47 +1,49 @@
 /* global LoadingWeights */
-/* global JuggRules */
 /* global ajax */
 
 (function() {
     'use strict';
 
     function start() {
-        //get page variable from php
         var request = new ajax();
-        request.send('test.php/page-data', 
-        function(data){
-            buildPage(JSON.parse(data));
-        },
-        function(){
-            alert('error');
-        });
+        request.get('test.php/page-data')
+            .then(function(data) {
+                var liftData = JSON.parse(data);
+                request.get('test.php/jugg-rules')
+                    .then(function(response) {
+                        var rules = JSON.parse(response);
+                        buildPage(liftData, rules);
+                    });
+
+            });
     }
-    
-    function buildPage(page){
+
+    function buildPage(workout, juggRules) {
         //for the first lift that isn't done
-        var today;
-        for (var i = 0; i < page.lifts.length; i++) {
-            if (page.lifts[i].done === false) {
-                today = page.lifts[i];
+        var thisLift;
+        for (var i = 0; i < workout.lifts.length; i++) {
+            if (workout.lifts[i].done === false) {
+                thisLift = workout.lifts[i];
                 break;
             }
         }
+        
         //build the page
-        document.getElementById('lift-name').innerHTML = today.name;
-        document.getElementById('lift-week').innerHTML = page.phase + '\'s Week &nbsp;';
-        document.getElementById('phase-name').innerHTML = page.week + ' Phase';
+        document.getElementById('lift-name').innerHTML = thisLift.name;
+        document.getElementById('lift-week').innerHTML = workout.phase + '\'s Week &nbsp;';
+        document.getElementById('phase-name').innerHTML = workout.week + ' Phase';
 
         //create li's
-        var liftObj = JuggRules.Rules[page.phase][page.week];
+        var liftObj = juggRules.Rules[workout.phase][workout.week];
         for (var key in liftObj) {
             var reps = liftObj[key].reps;
-            var weight = parseInt(today.max, 10) * parseFloat(liftObj[key].percent);
+            var weight = parseInt(thisLift.max, 10) * parseFloat(liftObj[key].percent);
             var loadUp = LoadingWeights.getLoad(weight);
             var li = document.createElement('li');
             li.setAttribute('class', 'list-group-item');
             var html = '<span class="badge">' + weight + ' lbs</span>' +
                 '<span class="label label-primary">' + reps + ' Reps</span>' +
-                '&nbsp;&nbsp;<span class="label label-info">'+ loadUp +'</span>';
+                '&nbsp;&nbsp;<span class="label label-info">' + loadUp + '</span>';
             li.innerHTML = html;
             document.getElementById('lift-display').appendChild(li);
         }

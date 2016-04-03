@@ -3,8 +3,8 @@
 #this is a script for running a test server with python to ease development woes. 
 
 #check to see if python is installed
-command -v python >/dev/null 2>&1 || { 
-    echo >&2 "You need to have python installed for this to work."; 
+command -v php >/dev/null 2>&1 || { 
+    echo >&2 "You need to have php installed for this to work."; 
     exit 1; 
     }
 
