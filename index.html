@@ -15,7 +15,8 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
     crossorigin="anonymous"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+  
     <script src='weights.js'></script>
     <script src='ajax.js'></script>
 </head>
@@ -59,25 +60,9 @@
     <div class='container'>
         <div id="example"></div>
 
-        <div class="panel panel-primary">
-            <div class="panel-heading"><span id='lift-name'></span>
-                <span class='label label-info pull-right'>
-                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                    <span class="sr-only"></span>
-                    <span id='lift-week'></span>
-                    <span id='phase-name'></span>
-                </span>
-            </div>
-            <div class="panel-body">
-                <ul class="list-group" id='lift-display'>
-                    
-                </ul>
-                <button class='btn btn-success btn-xs pull-right'>Complete Exercise &nbsp;<span class='glyphicon glyphicon-ok'></span></button>
-            </div>
-        </div>
+        
     </div>
-    
-    <script src='start.js'></script>
+    <script type='text/babel' src='test.js'></script>        
 </body>
 
 </html>
