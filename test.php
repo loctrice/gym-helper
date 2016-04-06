@@ -15,10 +15,13 @@ switch ($method) {
     echo $data;
     break;
   case 'PUT':
+    parse_str(file_get_contents('php://input'), $_PUT);
     //write file
+    echo $_PUT['data'];
     break;
   case 'POST':
     //write file
+    file_put_contents('./data/' . $dataPoint . '.json', $_POST['data']);
     break;
   case 'DELETE':
     //write file
