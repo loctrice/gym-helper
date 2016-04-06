@@ -110,6 +110,7 @@ var Test = React.createClass({
                     <ul className="list-group">
                     {sets}
                     </ul>
+                    <button className='btn btn-warning btn-xs'>Back</button>
                     <button onClick={this.updateLift} className='btn btn-success btn-xs pull-right'>Complete Exercise &nbsp; <span className='glyphicon glyphicon-ok'></span></button>
                 </div>
             </div>

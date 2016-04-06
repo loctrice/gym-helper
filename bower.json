@@ -1,0 +1,28 @@
+{
+  "name": "gym-helper",
+  "homepage": "https://github.com/loctrice/gym-helper",
+  "description": "Application to track workout",
+  "main": "index.html",
+  "moduleType": [
+    "es6"
+  ],
+  "authors": [
+    "loctrice"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "react": "^0.14.8",
+    "bootstrap": "^3.3.6",
+    "babel": "*"
+  }
+}
