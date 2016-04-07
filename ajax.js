@@ -41,8 +41,6 @@ function ajax() {
 
             //Send the proper header information along with the request
             req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            req.setRequestHeader('Content-length', data.length);
-            req.setRequestHeader('Connection', 'close');
             req.onload = function() {
                 if (req.status === 200) {
                     resolve(req.response);

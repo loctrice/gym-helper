@@ -50,6 +50,37 @@ var Test = React.createClass({
                     });
             });
     },
+    undoLift: function() {
+        var index = this.state.liftIndex;
+        var liftData = this.state.liftData;
+        liftData.lifts[index].done = false;
+        if (index == 0) {
+            index = this.state.liftData.lifts.length;
+            //back the week up if we can
+            var phaseIndex = this.state.phases.indexOf(liftData.phase);        
+            var weekIndex = this.state.weeks.indexOf(liftData.week);
+
+            weekIndex--;
+            if (weekIndex <= 0) {
+                //we're at the beginning of the phase
+                //should we back up to the previous phase ?
+                weekIndex = 0;
+                index = 1; //don't back up the lift
+            }
+            liftData.week = this.state.weeks[weekIndex];
+            liftData.phase = this.state.phases[phaseIndex];            
+        }
+        index--;
+        liftData.lifts[index].done = false;
+        var post = new ajax();
+        post.post('test.php/page-data', 'data=' + JSON.stringify(liftData));
+        
+        this.setState({
+            liftData: liftData,
+            liftIndex: index,
+            loaded: true
+        });
+    },
     updateLift: function() {
         var index = this.state.liftIndex;
         var liftData = this.state.liftData;
@@ -110,7 +141,7 @@ var Test = React.createClass({
                     <ul className="list-group">
                     {sets}
                     </ul>
-                    <button className='btn btn-warning btn-xs'>Back</button>
+                    <button disabled={this.state.liftIndex == 0} onClick={this.undoLift} className='btn btn-danger btn-xs'><span className='glyphicon glyphicon-arrow-left'></span>&nbsp;Back</button>
                     <button onClick={this.updateLift} className='btn btn-success btn-xs pull-right'>Complete Exercise &nbsp; <span className='glyphicon glyphicon-ok'></span></button>
                 </div>
             </div>
