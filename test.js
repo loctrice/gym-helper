@@ -3,6 +3,8 @@ var Set = React.createClass({
         var weight = parseInt(this.props.thisLift.max, 10) * parseFloat(this.props.liftObj.percent);
         var loadUp = LoadingWeights.getLoad(weight);
         var reps = this.props.liftObj.reps;
+        reps = (reps === 0) ? "AMAP" : reps;
+        
         return (
             <li className='list-group-item'>
                 <span className="badge">{weight} lbs</span>
@@ -127,7 +129,8 @@ var Test = React.createClass({
                 sets.push(<Set workout={workout} liftObj={lift} thisLift={thisLift} />);
             }
         }
-        return (
+
+       return (
             <div className="panel panel-primary">
                 <div className="panel-heading"><span>{thisLift.name}</span>
                     <span className='label label-info pull-right'>

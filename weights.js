@@ -5,9 +5,22 @@ var LoadingWeights = (function() {
     var load = {};
 
     var service = {
-        getLoad: getLoadString
+        getLoad: getLoadString,
+        getNewMax: getNewMax
     };
     return service;
+
+    /** Formulat to progress through program.
+     *  @param {number} wave (i.e. 10's wave, 8's wave, etc)
+     *  @param {number} reps completed on AMAP
+     *  @param {number} current max for the lift
+     *  @param {number} amount to increment (typically 2.5 for arms and 5 for legs)
+     */
+    function getNewMax(wave, reps, max, inrement) {
+        var incrementReps = reps - wave; 
+        incrementReps = (incrementReps > 10) ? 10 : incrementReps;
+        return ((incrementReps * inrement) + max); 
+    }    
 
     function getLoadString(weight) {
         weight -= 45;
