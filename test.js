@@ -27,7 +27,6 @@ var Test = React.createClass({
         }
     },
     componentDidMount: function() {
-        console.log('mount');
         var self = this;
         var request = new ajax();
         request.get('test.php/page-data')
@@ -130,6 +129,11 @@ var Test = React.createClass({
             }
         }
 
+         /* when reps are AMAP we are done with a cycle and we need and
+        * input box for # of reps completed.
+        * That input box should default to the # of the week (i.e. 10's week)
+        * LoadingWeights.getNewMax(wave, reps, max, inrement) 
+        */        
        return (
             <div className="panel panel-primary">
                 <div className="panel-heading"><span>{thisLift.name}</span>

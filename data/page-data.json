@@ -1,1 +1,34 @@
-{"phase":10,"week":"Realization","lifts":[{"name":"Dead Lift","max":485,"done":false},{"name":"Bench Press","max":305,"done":false},{"name":"Push Press","max":240,"done":false},{"name":"Squat","max":470,"done":false}]}
+{
+    "phase": 10,
+    "week": "Realization",
+    "lifts": [
+        {
+            "name": "Dead Lift",
+            "max": 485,
+            "increment": 5,
+            "type": "Legs",
+            "done": false
+        },
+        {
+            "name": "Bench Press",
+            "max": 305,
+            "increment": 2.5,
+            "type": "Arms",
+            "done": false
+        },
+        {
+            "name": "Push Press",
+            "max": 240,
+            "increment": 2.5,
+            "type": "Arms",
+            "done": false
+        },
+        {
+            "name": "Squat",
+            "max": 470,
+            "increment": 5,
+            "type": "Legs",
+            "done": false
+        }
+    ]
+}
