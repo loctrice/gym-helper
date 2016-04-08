@@ -8,7 +8,7 @@ var Set = React.createClass({
         return (
             <li className='list-group-item'>
                 <span className="badge">{weight} lbs</span>
-                <span className="label label-primary">{reps}  Reps</span>
+                <span className="label label-primary">{reps}  Reps</span>                
                 &nbsp; &nbsp; <span className="label label-info">{loadUp}</span>           
             </li>
         )
@@ -21,6 +21,7 @@ var Test = React.createClass({
             thisLift: {},
             rules: {},
             liftIndex: 0,
+            maxReps: 0,
             phases: [10, 8, 5, 3],
             weeks: [ "Acumulation", "Intensification", "Realization"],
             loaded: false
@@ -44,6 +45,7 @@ var Test = React.createClass({
                         }
                         self.setState({
                             liftData: liftData,
+                            maxReps: liftData.phase,
                             rules: rules,
                             liftIndex: i,
                             loaded: true
@@ -82,12 +84,23 @@ var Test = React.createClass({
             loaded: true
         });
     },
-    updateLift: function() {
+    updateLift: function(e) {
+        e.preventDefault();
         var index = this.state.liftIndex;
         var liftData = this.state.liftData;
         var isLastLift = (index >= liftData.lifts.length - 1);
-        
         liftData.lifts[index].done = true;
+        var maxReps = this.state.maxReps;
+         
+        var thisRule = this.state.rules.Rules[liftData.phase][liftData.week];
+        var reps = thisRule[Object.keys(thisRule).sort().pop()].reps;
+        //if this is AMAP (realization phase) then update the max
+        if (reps === 0) { 
+            console.log('doing the max');
+            liftData.lifts[index].max = LoadingWeights
+                    .getNewMax(liftData.phase, maxReps, liftData.lifts[index].max, liftData.lifts[index].increment);
+        }
+
         if (isLastLift) {
             var phaseIndex = this.state.phases.indexOf(liftData.phase);        
             var weekIndex = this.state.weeks.indexOf(liftData.week);
@@ -107,13 +120,20 @@ var Test = React.createClass({
             index = -1;
         }
         
-        //post the update date for saving
+        maxReps = liftData.phase;
+        
         var post = new ajax();
         post.post('test.php/page-data', 'data=' + JSON.stringify(liftData));
         this.setState({
             liftData: liftData,
             liftIndex: ++index,
+            maxReps: maxReps,
             loaded: true
+        });
+    },
+    handleRepsChange: function(event) {
+        this.setState({
+            maxReps: event.target.value,
         });
     },
     render: function() {
@@ -122,6 +142,11 @@ var Test = React.createClass({
         if (this.state.loaded === true) {
             var workout = this.state.liftData;
             var liftObj = this.state.rules.Rules[workout.phase][workout.week];
+            var lastReps = liftObj[Object.keys(liftObj).sort().pop()].reps;
+            var input  = null;
+            if(lastReps === 0){
+                input = <input type="number" className="form-control" value={this.state.maxReps} onChange={this.handleRepsChange} />
+            }
             var thisLift = this.state.liftData.lifts[this.state.liftIndex];
             for (var key in liftObj) {
                 var lift = liftObj[key];
@@ -146,12 +171,25 @@ var Test = React.createClass({
                 </div>
                 <div className="panel-body">
                     <ul className="list-group">
-                    {sets}
+                        {sets}
                     </ul>
-                    <button disabled={this.state.liftIndex == 0} onClick={this.undoLift} className='btn btn-danger btn-xs'><span className='glyphicon glyphicon-arrow-left'></span>&nbsp;Back</button>
-                    <button onClick={this.updateLift} className='btn btn-success btn-xs pull-right'>Complete Exercise &nbsp; <span className='glyphicon glyphicon-ok'></span></button>
+                    <button disabled={this.state.liftIndex == 0} onClick={this.undoLift} className='btn btn-danger btn-xs'>
+                        <span className='glyphicon glyphicon-arrow-left'></span
+                        >&nbsp; Back
+                    </button>
+                    <form className="pull-right">
+                        <div className="form-group">
+                           {input}
+                        <button onClick={this.updateLift} className='btn btn-success btn-xs pull-right'>
+                            Complete Exercise &nbsp;
+                            <span className='glyphicon glyphicon-ok'></span>
+                        </button>
+                        </div>
+                        
+                    </form>
+                    
                 </div>
-            </div>
+           </div>
         )
     }
 });
