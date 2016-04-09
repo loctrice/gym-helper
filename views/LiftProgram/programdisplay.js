@@ -1,5 +1,5 @@
 
-var ProgramDisplay = React.createClass({
+window.ProgramDisplay = React.createClass({
     getInitialState: function() {
         return {
             liftData: {},
@@ -138,5 +138,3 @@ var ProgramDisplay = React.createClass({
         )
     }
 });
-
-React.render(<ProgramDisplay />, document.getElementById('example'));
