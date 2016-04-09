@@ -9,7 +9,7 @@ var Item = React.createClass({
     }
 });
 
-window.NavigationMenu = React.createClass({
+window.Navigation = React.createClass({
     getInitialState: function() {
         return {
             active: this.props.active,

@@ -1,24 +1,23 @@
 
-var Location = React.createClass({
+var ContentAreas = {
+    Home: <ProgramDisplay />,
+    About: <About />,
+    Review: <Review />,
+    Configure: <Configure />
+};
 
+var Location = React.createClass({
     render: function() {
-        var where = this.props.location;
-        switch (this.props.location) {
-            case 'Home':
-                return (<ProgramDisplay />);
-            default:
-                return (
-                    <h2>Not Home</h2>
-                );
-        }
+        return (ContentAreas[this.props.location]);
     }
 });
 
 var Main = React.createClass({
     getInitialState: function() {
+        var locations = Object.keys(ContentAreas);
         return {
-            locations: ['Home', 'About', 'Review', 'Configure'],            
-            content: 'Home'
+            locations: locations,            
+            content: locations[0]
         }
     },
     setContentArea: function(where) {
@@ -28,7 +27,7 @@ var Main = React.createClass({
         return (
             <div>
                 <nav id='site-navigation' className="navbar navbar-default navbar-static-top">
-                    <NavigationMenu setContentArea={this.setContentArea}
+                    <Navigation setContentArea={this.setContentArea}
                         locations={this.state.locations} active={this.state.content}/>
                 </nav>
                 <div className='container'>
