@@ -7,8 +7,8 @@ window.ProgramDisplay = React.createClass({
             rules: {},
             liftIndex: 0,
             maxReps: 0,
-            phases: [10, 8, 5, 3],
-            weeks: [ "Acumulation", "Intensification", "Realization"],
+            phases: constants.WEEKS,
+            weeks: constants.PHASES,
             loaded: false
         }
     },

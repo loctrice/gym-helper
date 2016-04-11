@@ -4,10 +4,10 @@
     "lifts": [
         {
             "name": "Dead Lift",
-            "max": 485,
+            "max": 475,
             "increment": 5,
             "type": "Legs",
-            "done": false
+            "done": true
         },
         {
             "name": "Bench Press",
