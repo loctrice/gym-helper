@@ -53,6 +53,26 @@ window.Configure = React.createClass({
             data: data
         });
     },
+    addNew: function () {
+        var liftName = prompt("Name of the new lift:", "New Lift");
+        if (liftName === null || liftName === undefined) {
+            return;
+        }
+        var newLift = {
+            name: liftName,
+            max: 45,
+            increment: 5,
+            type: "Legs",
+            done: false
+        };
+        var data = this.state.data;
+        data.lifts = data.lifts.concat(newLift);
+        data.lifts.move(data.lifts.length - 1, 0);
+        ConfigurationUtils.post(data);
+        this.setState({
+            data: data
+        });
+    },
     render: function() {
         if(this.state.loaded === false){
             return (<div className='well'><p>Loading....</p></div>);
@@ -71,7 +91,7 @@ window.Configure = React.createClass({
                     <PhaseSelection weekChange={this.weekChange} phases={this.state.phases} currentWeek={this.state.data.week} />
                 </div>
                 <div className='form-group'>
-                    <button className='btn btn-primary form-control'>
+                    <button className='btn btn-primary form-control' onClick={this.addNew}>
                         <span>Add Exercise</span>
                         <span className='pull-right glyphicon glyphicon-plus-sign'></span>
                     </button>
