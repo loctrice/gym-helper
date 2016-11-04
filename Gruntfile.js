@@ -4,10 +4,11 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         concat: {
             options: {
-                separator: ';'
+                separator: ';',
+                transform: [['babelify', {presets: ['es2015', 'react']}]]
             },
             dist: {
-                src: ['src/**/*.js', 'src/views/**/*.jsx'],
+                src: ['src/**/**/*.js'],
                 dest: 'dist/<%= pkg.name %>.js'
             }
         },
@@ -24,32 +25,36 @@ module.exports = function(grunt) {
         qunit: {
             files: ['test/**/*.html']
         },
-        jshint: {
-            files: ['Gruntfile.js', 'src/**/**/*.js', 'test/**/*.js'],
-            options: {
-                // options here to override JSHint defaults
-                globals: {
-                    jQuery: true,
-                    console: true,
-                    module: true,
-                    document: true
-                }
-            }
-        },
         watch: {
             files: ['<%= jshint.files %>'],
-            tasks: ['jshint', 'qunit']
+            tasks: ['jshint', 'qunit'],
+
+        },
+        react: {
+            dynamic_mappings: {
+                files: [
+                    /* Controllers compiling. */
+                    {
+                        expand: true,
+                        cwd: './src/views',
+                        src: ['**/*.jsx'],
+                        dest: './src/views',
+                        ext: '.js'
+                    }
+               ]
+            }
         }
+
     });
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-qunit');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-react');
 
     grunt.registerTask('test', ['jshint', 'qunit']);
 
-    grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
+    grunt.registerTask('default', ['react', 'concat', 'uglify']);
 
 };
