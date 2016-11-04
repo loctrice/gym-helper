@@ -22,7 +22,6 @@
   "dependencies": {
     "jquery": "^2.2.3",
     "react": "^0.14.8",
-    "bootstrap": "^3.3.6",
-    "babel": "*"
+    "bootstrap": "^3.3.6"
   }
 }
