@@ -1,32 +1,32 @@
-window.Exercise = React.createClass({
-   onCompletedChange: function(event){
+export default class Exercise extends  React.Component{
+   onCompletedChange(event){
        var lift = this.props.lift;
        lift.done = !lift.done;
        this.props.itemChanged(lift, this.props.index);
-   },
-   onMaxChange: function(event){
+   }
+   onMaxChange(event){
        var lift = this.props.lift;
        lift.max = event.target.value;
        this.props.itemChanged(lift, this.props.index);
-   },
-   onIncrementChange: function(event){
+   }
+   onIncrementChange(event){
        var lift = this.props.lift;
        lift.increment = event.target.value;
        this.props.itemChanged(lift, this.props.index);
-   },
-   onTypeChange: function(event){
+   }
+   onTypeChange(event){
        var lift = this.props.lift;
        lift.type = event.target.value;
        this.props.itemChanged(lift, this.props.index);
-   },
-   removeLift: function(event){
+   }
+   removeLift(event){
        this.props.deleteLift(this.props.index);
-   },
+   }
    /* may want to change this to up/down arrow to move in list. It updates super fast. */
-   reorder: function(event){
+   reorder(event){
        this.props.reorderLifts(event.target.value, this.props.index);
-   },
-   render: function(){
+   }
+   render(){
        var lift = this.props.lift;
        return(
            <div className='form-group'>
@@ -69,4 +69,4 @@ window.Exercise = React.createClass({
             </div>              
        );
    } 
-});
+};

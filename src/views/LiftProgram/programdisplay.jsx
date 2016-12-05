@@ -1,6 +1,6 @@
 
-window.ProgramDisplay = React.createClass({
-    getInitialState: function() {
+export default class ProgramDisplay extends  React.Component{
+    getInitialState() {
         return {
             liftData: {},
             thisLift: {},
@@ -11,11 +11,11 @@ window.ProgramDisplay = React.createClass({
             weeks: constants.PHASES,
             loaded: false
         }
-    },
-    componentDidMount: function() {
+    }
+    componentDidMount() {
         LiftProgramUtils.get(this);
-    },
-    undoLift: function() {
+    }
+    undoLift() {
         var liftIndex = this.state.liftIndex;
         var liftData = this.state.liftData;
         liftData.lifts[liftIndex].done = false;
@@ -41,8 +41,8 @@ window.ProgramDisplay = React.createClass({
             liftData: liftData,
             liftIndex: liftIndex,
         });
-    },
-    updateLift: function(e) {
+    }
+    updateLift(e) {
         e.preventDefault(); //stop form post
         var liftIndex = this.state.liftIndex;
         var liftData = this.state.liftData;
@@ -80,13 +80,13 @@ window.ProgramDisplay = React.createClass({
             liftIndex: ++liftIndex,
             maxReps: maxReps,
         });
-    },
-    handleRepsChange: function(event) {
+    }
+    handleRepsChange(event) {
         this.setState({
             maxReps: event.target.value,
         });
-    },
-    render: function() {
+    }
+    render() {
         var sets = [];
         var thisLift = { name: 'Loading' };
         if (this.state.loaded === true) {
@@ -137,4 +137,4 @@ window.ProgramDisplay = React.createClass({
            </div>
         )
     }
-});
+};

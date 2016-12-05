@@ -1,4 +1,9 @@
 
+import {ProgramDisplay} from '../LiftProgram/programdisplay'
+import {About} from '../About/about'
+import {Review} from '../Review/review'
+import {Configure} from '../Configure/configure'
+
 var ContentAreas = {
     Home: <ProgramDisplay />,
     About: <About />,
@@ -6,24 +11,24 @@ var ContentAreas = {
     Configure: <Configure />
 };
 
-var Location = React.createClass({
-    render: function() {
+export class Location extends React.Component{
+    render() {
         return (ContentAreas[this.props.location]);
     }
-});
+};
 
-var Main = React.createClass({
-    getInitialState: function() {
+export class Main extends React.Component{
+    getInitialState() {
         var locations = Object.keys(ContentAreas);
         return {
             locations: locations,            
             content: locations[0]
         }
-    },
-    setContentArea: function(where) {
+    }
+    setContentArea(where) {
         this.setState({ content: where });
-    },
-    render: function() {
+    }
+    render() {
         return (
             <div>
                 <nav id='site-navigation' className="navbar navbar-default navbar-static-top">
@@ -36,6 +41,6 @@ var Main = React.createClass({
             </div>
         );
     }
-});
+};
 
 React.render(<Main />, document.getElementById('view'));

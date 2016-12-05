@@ -1,21 +1,21 @@
 
-var Item = React.createClass({
-    render: function() {
+export class Item extends React.Component{
+    render() {
         return (
             <li className={this.props.activeClass}>
                 <a href='#' onClick={this.props.updateNavigation}>{this.props.text}</a>
             </li>
         );
     }
-});
+};
 
-window.Navigation = React.createClass({
-    getInitialState: function() {
+export class Navigation extends React.Component({
+    getInitialState() {
         return {
             active: this.props.active,
         };
     },
-    updateActiveLink: function(event) {
+    updateActiveLink(event) {
         event.preventDefault();
         var thisValue = event.target.text;
         if (this.state.active !== thisValue) {
@@ -23,7 +23,7 @@ window.Navigation = React.createClass({
         }
         this.props.setContentArea(thisValue);
     },
-    render: function() {
+    render() {
         var self = this;
         var links = this.props.locations.map(function(item) {
             var active = (item === self.state.active) ? 'active' : '';
@@ -55,5 +55,5 @@ window.Navigation = React.createClass({
             </div>
         )
     }
-});
+};
 

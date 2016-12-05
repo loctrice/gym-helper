@@ -1,9 +1,9 @@
 
-window.PhaseSelection = React.createClass({
-    change: function(event){
+export default class PhaseSelection extends  React.Component{
+    change(event){
         this.props.weekChange(event.target.value);
-    },
-   render:function(){
+    }
+   render(){
        var phases = this.props.phases.map(function(phase){
           return(<option value={phase}>{phase} Phase</option>) 
        });
@@ -13,4 +13,4 @@ window.PhaseSelection = React.createClass({
            </select>
        );
    } 
-});
+};

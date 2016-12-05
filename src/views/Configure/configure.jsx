@@ -1,16 +1,16 @@
-window.Configure = React.createClass({
-    componentDidMount: function(){
+export default class Configure extends React.Component{
+    componentDidMount(){
         ConfigurationUtils.get(this);
-    },
-    getInitialState: function(){
+    }
+    getInitialState(){
         return{
            waves: constants.WEEKS ,
            phases: constants.PHASES,
            data: null,
            loaded:false
         };
-    },
-    itemChanged: function(lift, index){
+    }
+    itemChanged(lift, index){
         var data = this.state.data;
         data.lifts[index] = lift;
         console.log(data);
@@ -18,8 +18,8 @@ window.Configure = React.createClass({
         this.setState({
             data: data
         });
-    },
-    deleteLift: function(index){
+    }
+    deleteLift(index){
       if(confirm("Are you sure you want to delete this item ?")){
         var data = this.state.data;
         data.lifts.splice(index,1);
@@ -28,32 +28,32 @@ window.Configure = React.createClass({
             data: data
         });  
       }
-    },
-    reorderLifts: function(order, index){
+    }
+    reorderLifts(order, index){
         var data = this.state.data;
         data.lifts.move(index, order);
         ConfigurationUtils.post(data);
         this.setState({
             data: data
         });
-    },
-    waveChange: function(newData){
+    }
+    waveChange(newData){
         var data = this.state.data;
         data.phase = newData;
         ConfigurationUtils.post(data);
         this.setState({
             data: data
         });
-    },
-    weekChange: function(newData){
+    }
+    weekChange(newData){
         var data = this.state.data;
         data.week = newData;
         ConfigurationUtils.post(data);
         this.setState({
             data: data
         });
-    },
-    addNew: function () {
+    }
+    addNew(){
         var liftName = prompt("Name of the new lift:", "New Lift");
         if (liftName === null || liftName === undefined) {
             return;
@@ -72,8 +72,8 @@ window.Configure = React.createClass({
         this.setState({
             data: data
         });
-    },
-    render: function() {
+    }
+    render() {
         if(this.state.loaded === false){
             return (<div className='well'><p>Loading....</p></div>);
         }
@@ -100,4 +100,4 @@ window.Configure = React.createClass({
             </div>
         )
     }
-});
+};

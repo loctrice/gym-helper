@@ -1,8 +1,8 @@
-window.WaveSelection = React.createClass({
-    change: function(event){
+export default class WaveSelection extends React.Component{
+    change(event){
         this.props.waveChange(event.target.value);
-    },
-   render:function(){
+    }
+   render(){
        var waves = this.props.waves.map(function(wave){
            return (<option value={wave}>{wave}'s Wave</option>);
        });
@@ -12,4 +12,4 @@ window.WaveSelection = React.createClass({
            </select>
        );
    } 
-});
+};

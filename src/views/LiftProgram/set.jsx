@@ -1,5 +1,5 @@
-var Set = React.createClass({
-    render: function() {
+export default class Set extends React.Component{
+    render() {
         var weight = parseInt(this.props.thisLift.max * this.props.liftObj.percent);
         var loadUp = LoadingWeights.getLoad(weight);
         var reps = this.props.liftObj.reps;
@@ -13,6 +13,4 @@ var Set = React.createClass({
             </li>
         )
     }
-});
-
-window.Set = Set;
+};
