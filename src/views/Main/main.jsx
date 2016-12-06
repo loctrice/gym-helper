@@ -3,6 +3,7 @@ import {ProgramDisplay} from '../LiftProgram/programdisplay'
 import {About} from '../About/about'
 import {Review} from '../Review/review'
 import {Configure} from '../Configure/configure'
+import {Navigation} from '../Navigation/navigation'
 
 var ContentAreas = {
     Home: <ProgramDisplay />,

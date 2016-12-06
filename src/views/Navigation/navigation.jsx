@@ -7,14 +7,14 @@ export class Item extends React.Component{
             </li>
         );
     }
-};
+}
 
-export class Navigation extends React.Component({
+export class Navigation extends React.Component{
     getInitialState() {
         return {
             active: this.props.active,
         };
-    },
+    }
     updateActiveLink(event) {
         event.preventDefault();
         var thisValue = event.target.text;
@@ -22,7 +22,7 @@ export class Navigation extends React.Component({
             this.setState({ active: thisValue });
         }
         this.props.setContentArea(thisValue);
-    },
+    }
     render() {
         var self = this;
         var links = this.props.locations.map(function(item) {
@@ -55,5 +55,5 @@ export class Navigation extends React.Component({
             </div>
         )
     }
-};
+}
 
