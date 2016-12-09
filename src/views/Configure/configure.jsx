@@ -1,14 +1,20 @@
+import React from 'react';
+import constants from '../../js/constants.js'
+import ajax from '../../js/ajax'
+import ConfigurationUtils from './configure'
+
 export default class Configure extends React.Component{
-    componentDidMount(){
-        ConfigurationUtils.get(this);
-    }
-    getInitialState(){
-        return{
+    constructor(props) {
+        super(props);
+        this.state = {
            waves: constants.WEEKS ,
            phases: constants.PHASES,
            data: null,
            loaded:false
         };
+    }
+    componentDidMount(){
+        ConfigurationUtils.get(this);
     }
     itemChanged(lift, index){
         var data = this.state.data;

@@ -1,19 +1,10 @@
-/* exported ajax */
-/** Represents an ajax request.
-* @constructor
-*/
-function ajax() {
+export default class ajax{
     'use strict';
 
-    var service = {
-        get: get,
-        post: post
-    };
-
-    return service;
+    constructor(){}
 
     /** Sends a get request to a given url and returns a promise. */
-    function get(url) {
+    get(url) {
         return new Promise(function(resolve, reject) {
             var req = new XMLHttpRequest();
             req.open('GET', url);
@@ -25,7 +16,7 @@ function ajax() {
     /** Send a post with form data.
      *  Note: Data must be in key value url style.
      *  i.e. -  foo=bar&foobar=taco*/
-    function post(url, data) {
+    post(url, data) {
         return new Promise(function(resolve, reject) {
             var req = new XMLHttpRequest();
             req.open('POST', url);
@@ -40,7 +31,7 @@ function ajax() {
      *  @param {method} method to call when success happens
      *  @param {method} method to call when things don't go as planned
      */
-    function setupRequest(req, resolve, reject) {
+    setupRequest(req, resolve, reject) {
         req.onload = function() {
             if (req.status === 200) {
                 resolve(req.response);

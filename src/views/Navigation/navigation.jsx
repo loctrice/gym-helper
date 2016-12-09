@@ -1,5 +1,10 @@
 
+import React from 'react';
+
 export class Item extends React.Component{
+    constructor(props) {
+        super(props);
+    }
     render() {
         return (
             <li className={this.props.activeClass}>
@@ -10,9 +15,10 @@ export class Item extends React.Component{
 }
 
 export class Navigation extends React.Component{
-    getInitialState() {
-        return {
-            active: this.props.active,
+    constructor(props) {
+        super(props);
+        this.state = {
+            active: this.props.active
         };
     }
     updateActiveLink(event) {
@@ -25,12 +31,13 @@ export class Navigation extends React.Component{
     }
     render() {
         var self = this;
-        var links = this.props.locations.map(function(item) {
+        var links = this.props.locations.map((item, idx) => {
             var active = (item === self.state.active) ? 'active' : '';
             return (
-                <Item activeClass={active} text={item} updateNavigation={self.updateActiveLink}/>
+                <Item key={idx} activeClass={active} text={item} updateNavigation={self.updateActiveLink.bind(self)}/>
             );
         });
+
         return (
             <div>
                 <div className="navbar-header">

@@ -1,4 +1,9 @@
+import React from 'react';
+
 export default class Set extends React.Component{
+    constructor(props) {
+        super(props);
+    }
     render() {
         var weight = parseInt(this.props.thisLift.max * this.props.liftObj.percent);
         var loadUp = LoadingWeights.getLoad(weight);

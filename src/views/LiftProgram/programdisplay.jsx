@@ -1,7 +1,11 @@
 
+import React from 'react';
+
 export default class ProgramDisplay extends  React.Component{
-    getInitialState() {
-        return {
+    constructor(props) {
+        super(props);
+        
+        this.state = {
             liftData: {},
             thisLift: {},
             rules: {},

@@ -18,7 +18,7 @@ module.exports = function(grunt) {
         browserify: {
             options: {
                 es6module: true,
-                transform:  [['babelify', { presets: ["react", "es2015"] }]]//require('grunt-react').browserify ]
+                transform:  [['babelify', { presets: ["react", "es2015"], plugins: ["transform-class-properties"] }]]//require('grunt-react').browserify ]
             },
             app: {
                 src: ['src/**/**/*.js', 'src/views/**/*.js'],
@@ -41,6 +41,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-react');
     grunt.loadNpmTasks('grunt-browserify');
+    grunt.loadNpmTasks('')
     //grunt.registerTask('test', ['jshint', 'qunit']);
 
     grunt.registerTask('default', ['clean:files','react','browserify']);

@@ -1,4 +1,9 @@
+import React from 'react';
+
 export default class Exercise extends  React.Component{
+    constructor(props) {
+        super(props);
+    }
    onCompletedChange(event){
        var lift = this.props.lift;
        lift.done = !lift.done;

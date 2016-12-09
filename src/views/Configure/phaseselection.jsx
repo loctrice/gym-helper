@@ -1,5 +1,9 @@
+import React from 'react';
 
 export default class PhaseSelection extends  React.Component{
+    constructor(props) {
+        super(props);
+    }
     change(event){
         this.props.weekChange(event.target.value);
     }

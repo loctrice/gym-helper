@@ -1,5 +1,5 @@
 /* exported constants */
-var constants = {
-    WEEKS: [10,8,5,3],
-    PHASES: ['Acumulation', 'Intensification', 'Realization']
+export default class constants {
+     get WEEKS() { return [10,8,5,3]};
+     get PHASES() {['Acumulation', 'Intensification', 'Realization']};
 };

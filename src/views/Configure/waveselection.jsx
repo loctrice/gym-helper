@@ -1,4 +1,9 @@
+import React from 'react';
+
 export default class WaveSelection extends React.Component{
+    constructor(props) {
+        super(props);
+    }
     change(event){
         this.props.waveChange(event.target.value);
     }
